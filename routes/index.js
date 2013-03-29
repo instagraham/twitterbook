@@ -11,19 +11,9 @@ var feed =  new RSS({
 	    author: 'Kai Austin and Graham Hooton'
 	});
 
-
 exports.index = function(req, res){
-	/* lets create an rss feed */
-
-	feed.items.push({
-	    title:  'fda',
-	    description: 'asdf',
-	    url: 'dsaf', // link to the item
-	    date: 'asdf' // any format that js Date can parse.
-	});
-	var xml = feed.xml();
-	console.log(xml)
-	res.render('index', { title: 'Express', feed :xml});
+	var xml = feed.xml()
+	res.render('index', { title: 'Express', feed:xml});
 };
 
 exports.additem = function(req, res){
@@ -38,10 +28,5 @@ exports.additem = function(req, res){
 	    url: new_url, // link to the item
 	    date: new_dat // any format that js Date can parse.
 	});
-
-	var xml = feed.xml();
-	console.log(xml)
-	res.render('index', { title: 'Express', feed :xml});
-
     res.redirect('/')
 }
