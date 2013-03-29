@@ -4,13 +4,22 @@ var fs = require('fs');
  * GET home page.
  */
 var feed =  new RSS({
-	    title: 'Twitbook',
+	    title: 'Twitbook Ahoy',
 	    description: 'Twitbook transforms your facebook newsfeed into individual tweets for you',
 	    feed_url: 'http://stormy-lowlands-8280.herokuapp.com/',
 	    site_url: 'http://stormy-lowlands-8280.herokuapp.com/',
 	    image_url: 'http://example.com/icon.png',
 	    author: 'Kai Austin and Graham Hooton'
 	});
+
+feed.item({
+    title:  'item title',
+    description: 'use this for the content. It can include html.',
+    url: 'http://example.com/article4?this&that', // link to the item
+    guid: '1123', // optional - defaults to url
+    author: 'Guest Author', // optional - defaults to feed author property
+    date: String(new Date()) // replace this with a real date
+});
 
 exports.index = function(req, res){
 	var xml = feed.xml()
@@ -20,7 +29,8 @@ exports.index = function(req, res){
         console.log(err);
     } else {
 
-    	res.send('index', { title: 'Express', feed:xml});
+      res.setHeader('Content-Type', 'application/rss+xml');
+    	res.send(xml);
         console.log("The file was saved!");
     }
   }); 
