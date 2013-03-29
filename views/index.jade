@@ -2,9 +2,7 @@ extends layout
 
 block content
   h1= title
-  p #{feed.title}
-  each item in items
-    p #{item.title}
+  #{feed}
   form(action='/additem', method = 'POST')
     |Title:
     input(type = 'textbox', name = 'title')

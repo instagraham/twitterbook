@@ -13,7 +13,16 @@ exports.index = function(req, res){
 	    image_url: 'http://example.com/icon.png',
 	    author: 'Dylan Greene'
 	});
-	res.render('index', { title: 'Express', feed :req.session.feed, items: req.session.feed.items});
+
+	req.session.feed.items.push({
+	    title:  'fda',
+	    description: 'asdf',
+	    url: 'dsaf', // link to the item
+	    date: 'asdf' // any format that js Date can parse.
+	});
+	var xml = req.session.feed.xml();
+	console.log(xml)
+	res.render('index', { title: 'Express', feed :xml});
 };
 
 exports.additem = function(req, res){
@@ -28,6 +37,6 @@ exports.additem = function(req, res){
 	    url: new_url, // link to the item
 	    date: new_dat // any format that js Date can parse.
 	});
-
-    res.render('index', { title: 'Express', feed : req.session.feed, items: req.session.feed.items});
+	
+    res.redirect('/')
 }
