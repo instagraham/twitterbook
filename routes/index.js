@@ -2,10 +2,7 @@ var RSS = require('rss');
 /*
  * GET home page.
  */
-
-exports.index = function(req, res){
-	/* lets create an rss feed */
-	req.session.feed = new RSS({
+var feed =  new RSS({
 	    title: 'title',
 	    description: 'description',
 	    feed_url: 'http://example.com/rss.xml',
@@ -14,13 +11,17 @@ exports.index = function(req, res){
 	    author: 'Dylan Greene'
 	});
 
-	req.session.feed.items.push({
+
+exports.index = function(req, res){
+	/* lets create an rss feed */
+
+	feed.items.push({
 	    title:  'fda',
 	    description: 'asdf',
 	    url: 'dsaf', // link to the item
 	    date: 'asdf' // any format that js Date can parse.
 	});
-	var xml = req.session.feed.xml();
+	var xml = feed.xml();
 	console.log(xml)
 	res.render('index', { title: 'Express', feed :xml});
 };
@@ -31,12 +32,16 @@ exports.additem = function(req, res){
 	var new_url = req.body.link;
 	var new_dat = req.body.date;
 
-	req.session.feed.items.push({
+	feed.items.push({
 	    title:  new_tit,
 	    description: new_des,
 	    url: new_url, // link to the item
 	    date: new_dat // any format that js Date can parse.
 	});
-	
+
+	var xml = feed.xml();
+	console.log(xml)
+	res.render('index', { title: 'Express', feed :xml});
+
     res.redirect('/')
 }
