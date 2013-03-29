@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1= title
+  p #{feed.title}
+  each item in items
+    p #{item.title}
+  form(action='/additem', method = 'POST')
+    |Title:
+    input(type = 'textbox', name = 'title')
+    |<br> Description: 
+    input(type = 'textbox', name = 'description')       
+    |<br> url: 
+    input(type = 'textbox', name = 'url')
+    |<br> Date: 
+    input(type = 'textbox', name = 'date')
+    input(type = 'submit', value = 'submit')
