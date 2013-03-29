@@ -3,12 +3,12 @@ var RSS = require('rss');
  * GET home page.
  */
 var feed =  new RSS({
-	    title: 'title',
-	    description: 'description',
-	    feed_url: 'http://example.com/rss.xml',
-	    site_url: 'http://example.com',
+	    title: 'Twitbook',
+	    description: 'Twitbook transforms your facebook newsfeed into individual tweets for you',
+	    feed_url: 'http://stormy-lowlands-8280.herokuapp.com/',
+	    site_url: 'http://stormy-lowlands-8280.herokuapp.com/',
 	    image_url: 'http://example.com/icon.png',
-	    author: 'Dylan Greene'
+	    author: 'Kai Austin and Graham Hooton'
 	});
 
 
