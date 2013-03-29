@@ -1,4 +1,5 @@
 var RSS = require('rss');
+var fs = require('fs');
 /*
  * GET home page.
  */
@@ -13,8 +14,17 @@ var feed =  new RSS({
 
 exports.index = function(req, res){
 	var xml = feed.xml()
-	res.render('index', { title: 'Express', feed:xml});
-};
+	console.log(xml)
+	fs.writeFile("/tmp/file.xml", xml, function(err) {
+    if(err) {
+        console.log(err);
+    } else {
+
+    	res.send('index', { title: 'Express', feed:xml});
+        console.log("The file was saved!");
+    }
+  }); 
+}
 
 exports.additem = function(req, res){
 	var new_tit = req.body.title;
